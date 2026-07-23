@@ -1,9 +1,21 @@
 import { SignJWT, importPKCS8 } from "jose";
 
 async function getAccessToken() {
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const key = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim();
+  let key = process.env.GOOGLE_PRIVATE_KEY;
   if (!email || !key) return null;
+
+  // Netlify's env var UI can leave surrounding quotes or keep the
+  // literal two-character sequence \n instead of a real newline —
+  // normalize both cases so PKCS8 parsing never fails on formatting.
+  key = key.trim();
+  if (
+    (key.startsWith('"') && key.endsWith('"')) ||
+    (key.startsWith("'") && key.endsWith("'"))
+  ) {
+    key = key.slice(1, -1);
+  }
+  key = key.replace(/\\n/g, "\n");
 
   const privateKey = await importPKCS8(key, "RS256");
   const jwt = await new SignJWT({ scope: "https://www.googleapis.com/auth/spreadsheets" })

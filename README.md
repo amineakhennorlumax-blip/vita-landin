@@ -25,3 +25,4 @@ if you want the lead form to actually reach Google Sheets / Meta / WhatsApp.
 
 Copy `.env.local.example` to `.env.local` and fill in the values you need.
 "# vita-landin" 
+"# vita-landing" 

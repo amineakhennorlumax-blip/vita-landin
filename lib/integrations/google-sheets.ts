@@ -17,6 +17,12 @@ async function getAccessToken() {
   }
   key = key.replace(/\\n/g, "\n");
 
+  // TEMP DIAGNOSTIC — safe to keep briefly, logs shape not content.
+  console.log("[google-sheets] key length:", key.length);
+  console.log("[google-sheets] key starts:", JSON.stringify(key.slice(0, 30)));
+  console.log("[google-sheets] key ends:", JSON.stringify(key.slice(-30)));
+  console.log("[google-sheets] newline count:", (key.match(/\n/g) || []).length);
+
   const privateKey = await importPKCS8(key, "RS256");
   const jwt = await new SignJWT({ scope: "https://www.googleapis.com/auth/spreadsheets" })
     .setProtectedHeader({ alg: "RS256" })

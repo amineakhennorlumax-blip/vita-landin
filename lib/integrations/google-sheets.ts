@@ -43,8 +43,7 @@ async function getAccessToken() {
     console.error("[google-sheets] token request failed:", res.status, JSON.stringify(tokenJson));
   }
   return tokenJson.access_token as string | undefined;
-}
-
+  }
 export async function appendLeadRow(lead: {
   name: string; phone: string; country: string; job: string; hasPassport: boolean | null;
 }) {

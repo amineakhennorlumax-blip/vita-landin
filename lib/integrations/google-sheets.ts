@@ -33,13 +33,16 @@ async function getAccessToken() {
     .setExpirationTime("10m")
     .sign(privateKey);
 
-  const res = await fetch("https://oauth2.googleapis.com/token", {
+ const res = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: jwt }),
   });
-  const { access_token } = await res.json();
-  return access_token as string | undefined;
+  const tokenJson = await res.json();
+  if (!res.ok || !tokenJson.access_token) {
+    console.error("[google-sheets] token request failed:", res.status, JSON.stringify(tokenJson));
+  }
+  return tokenJson.access_token as string | undefined;
 }
 
 export async function appendLeadRow(lead: {

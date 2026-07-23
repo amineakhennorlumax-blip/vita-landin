@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "El Messiri", "Amiri", serif;
+  --font-body: "IBM Plex Sans Arabic", "Tajawal", sans-serif;
+  --font-latin: "Inter", sans-serif;
+}
+
+html { scroll-behavior: auto; }
+
+body {
+  background-color: #FAF8F3;
+  color: #0F1B2D;
+  font-family: var(--font-body);
+  direction: rtl;
+  overflow-x: clip;
+}
+
+.latin { direction: ltr; font-family: var(--font-latin); unicode-bidi: isolate; }
+
+::selection { background-color: #C89A4A; color: #0F1B2D; }
+
+.seam {
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(200, 154, 74, 0.55) 0,
+    rgba(200, 154, 74, 0.55) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  height: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible { outline: 2px solid #C89A4A; outline-offset: 3px; border-radius: 4px; }

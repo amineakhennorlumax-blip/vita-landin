@@ -18,6 +18,7 @@ async function getAccessToken() {
   key = key.replace(/\\n/g, "\n");
 
   // TEMP DIAGNOSTIC — safe to keep briefly, logs shape not content.
+console.log("[google-sheets] email used:", JSON.stringify(email));
   console.log("[google-sheets] key length:", key.length);
   console.log("[google-sheets] key starts:", JSON.stringify(key.slice(0, 30)));
   console.log("[google-sheets] key ends:", JSON.stringify(key.slice(-30)));

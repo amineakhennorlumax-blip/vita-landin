@@ -24,3 +24,4 @@ if you want the lead form to actually reach Google Sheets / Meta / WhatsApp.
 | WhatsApp Cloud API | WHATSAPP_PHONE_ID, WHATSAPP_ACCESS_TOKEN, WHATSAPP_NOTIFY_NUMBER |
 
 Copy `.env.local.example` to `.env.local` and fill in the values you need.
+"# vita-landin" 

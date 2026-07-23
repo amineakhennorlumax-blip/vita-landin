@@ -1,9 +1,16 @@
 import { SignJWT, importPKCS8 } from "jose";
 
 async function getAccessToken() {
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim();
+  let email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim();
   let key = process.env.GOOGLE_PRIVATE_KEY;
   if (!email || !key) return null;
+
+  if (
+    (email.startsWith('"') && email.endsWith('"')) ||
+    (email.startsWith("'") && email.endsWith("'"))
+  ) {
+    email = email.slice(1, -1);
+  }
 
   // Netlify's env var UI can leave surrounding quotes or keep the
   // literal two-character sequence \n instead of a real newline —
